@@ -1,2 +1,0 @@
-lookback_days,rebalance_min_days,rebalance_max_days,drift_threshold,take_profit_pct
-285,60,90,0.057,0.15
