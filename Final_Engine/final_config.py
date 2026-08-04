@@ -1,0 +1,91 @@
+"""
+final_config.py - Final trading configuration for the Optimal_Ethical portfolio.
+All parameters optimised through Phase 5 walk-forward validation.
+"""
+
+import os
+from datetime import datetime
+
+# ---------------------------------------------------------------------------
+# Paths
+# ---------------------------------------------------------------------------
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+LOG_DIR = os.path.join(BASE_DIR, "logs")
+os.makedirs(LOG_DIR, exist_ok=True)
+
+# ---------------------------------------------------------------------------
+# Asset universe - Optimal_Ethical (15 assets from ethical_config.py)
+# ---------------------------------------------------------------------------
+
+TICKERS = [
+    "RSG",     # Republic Services - Waste management leader
+    "NVDA",    # NVIDIA - AI leader
+    "VWS.CO",  # Vestas - Denmark (wind turbine leader)
+    "ADBE",    # Adobe - Creative software
+    "LLY",     # Eli Lilly - Pharmaceuticals
+    "NEE",     # NextEra Energy - Renewable utility
+    "NOW",     # ServiceNow - Enterprise software
+    "COST",    # Costco - Retail with strong labour practices
+    "WM",      # Waste Management - Waste management leader
+    "ENPH",    # Enphase Energy - Solar
+    "UNH",     # UnitedHealth - Health insurance
+    "FSLR",    # First Solar - Solar manufacturing
+    "V",       # Visa - Financial inclusion
+    "MSFT",    # Microsoft - Enterprise software
+    "GILD",    # Gilead Sciences - Pharmaceuticals
+]
+
+# ---------------------------------------------------------------------------
+# Strategy parameters (optimised via run_ethical_optimisation.py)
+# ---------------------------------------------------------------------------
+
+INITIAL_CAPITAL = 100.0
+START_DATE = "2020-01-01"
+
+# Optimised parameters for Optimal_Ethical (from ethical_config.py)
+LOOKBACK_DAYS = 405
+REBALANCE_MIN_DAYS = 110
+REBALANCE_MAX_DAYS = 130
+DRIFT_THRESHOLD = 0.085          # 8.5%
+RELATIVE_TAKE_PROFIT_PCT = 0.203  # 20.3%
+
+# ---------------------------------------------------------------------------
+# Risk management
+# ---------------------------------------------------------------------------
+
+RISK_FREE_RATE = 0.045
+CASH_MIN_VOLATILITY = 0.25
+CASH_MAX_VOLATILITY = 0.50
+CASH_MAX_ALLOCATION = 0.20
+CASH_INTEREST_RATE = 0.0525
+
+# ---------------------------------------------------------------------------
+# Kelly parameters (optimised via kelly_lookback_optimiser_ethical.py)
+# ---------------------------------------------------------------------------
+
+KELLY_LOOKBACK = 165
+KELLY_BASE_CAP = 0.20
+KELLY_MAX_CAP = 1.00
+KELLY_FRACTION = 1.00
+
+# ---------------------------------------------------------------------------
+# Transaction costs (Trading 212)
+# ---------------------------------------------------------------------------
+
+FX_FEE_PCT = 0.0015
+SPREAD_PCT = 0.0005
+COMMISSION_PCT = 0.0
+TRANSACTION_COST_PCT = FX_FEE_PCT + SPREAD_PCT + COMMISSION_PCT
+ROUND_TRIP_COST_PCT = 2 * TRANSACTION_COST_PCT  # 0.4%
+
+# ---------------------------------------------------------------------------
+# Logging
+# ---------------------------------------------------------------------------
+
+PORTFOLIO_LOG_FILE = "portfolio_log.csv"
+REBALANCE_LOG_FILE = "rebalance_log.csv"
+LAST_REBALANCE_FILE = "last_rebalance.txt"
+REBALANCE_DECISIONS_FILE = "rebalance_decisions.csv"
+TAKE_PROFIT_LOG_FILE = "take_profit_log.csv"
+LAST_UPDATE_DATE_FILE = "last_update_date.txt"
